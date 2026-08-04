@@ -1,4 +1,4 @@
-﻿drug_ingredient,buzz_count,source_regions,company,trend_tags,key_summary,latest_date,primary_url
-Datopotamab Deruxtecan (Dato-DXd),2,EU-EMA、US-FDA,AstraZeneca / AstraZeneca / Daiichi Sankyo,🔥 高聲量關注 | 🌍 多國/多機構聯動,[US-FDA] 獲准用於先前接受過治療之轉移性非小細胞肺癌 (NSCLC)，三期臨床數據顯示 PFS 顯著改善。；[EU-EMA] 歐洲藥品管理局給予正面審查意見，預計近期於歐盟市場上市。,2026-08-02,https://www.fda.gov
-Elinzanetant,1,Global Pharma News,Bayer,📈 新進觀察標的,[Global Pharma News] 針對更年期血管舒縮症狀 (VMS) 之 NK1/3 受體拮抗劑，多家國際新聞連續報導其安全性與療效。,2026-08-01,https://www.biopharmadive.com
-Inclisiran,1,TFDA 衛福部,Novartis,📈 新進觀察標的,[TFDA 衛福部] 一年僅需施打兩針之 siRNA 藥物，提供高膽固醇血症患者長期控制新選擇。,2026-08-03,https://www.fda.gov.tw
+﻿drug_ingredient,buzz_count,source_regions,company,trend_tags,articles_json,latest_date
+Datopotamab Deruxtecan (Dato-DXd),2,US-FDA、EU-EMA,AstraZeneca / Daiichi Sankyo / AstraZeneca,🔥 高聲量關注 | 🌍 多國/多機構聯動,"[{""source"": ""US-FDA"", ""summary"": ""獲准用於先前接受過治療之轉移性非小細胞肺癌 (NSCLC)，三期臨床數據顯示 PFS 顯著改善。"", ""url"": ""https://www.fda.gov/news-events/press-announcements"", ""date"": ""2026-08-02""}, {""source"": ""EU-EMA"", ""summary"": ""歐洲藥局給予正面審查意見，預計近期於歐盟市場上市。"", ""url"": ""https://www.ema.europa.eu/en/news"", ""date"": ""2026-08-01""}]",2026-08-02
+Elinzanetant,1,Global Pharma News,Bayer,📈 新進觀察標的,"[{""source"": ""Global Pharma News"", ""summary"": ""針對更年期血管舒縮症狀 (VMS) 之 NK1/3 受體拮抗劑，多家國際新聞報導其安全性。"", ""url"": ""https://www.biopharmadive.com"", ""date"": ""2026-08-01""}]",2026-08-01
+Inclisiran,1,TFDA 衛福部,Novartis,📈 新進觀察標的,"[{""source"": ""TFDA 衛福部"", ""summary"": ""一年僅需施打兩針之 siRNA 藥物，提供高膽固醇血症患者長期控制新選擇。"", ""url"": ""https://www.fda.gov.tw/TC/news.aspx"", ""date"": ""2026-08-03""}]",2026-08-03
