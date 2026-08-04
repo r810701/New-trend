@@ -3,163 +3,92 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>新藥趨勢與主動進用情報儀表板</title>
+    <title>全球新藥熱度與上市聲量排行榜</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; font-family: "Microsoft JhengHei", sans-serif; }
-        .hero-header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 2.5rem 0; }
-        .card-insight { border-left: 5px solid #0d6efd; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .badge-advantage { background-color: #e7f5ff; color: #1971c2; border: 1px solid #a5d8ff; }
+        body { background-color: #f4f7f6; font-family: "Microsoft JhengHei", sans-serif; }
+        .hero-header { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: white; padding: 2.5rem 0; }
+        .card-insight { border-left: 5px solid #ff9f43; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .badge-buzz { background-color: #ffeaa7; color: #d63031; font-weight: bold; border: 1px solid #fdcb6e; }
+        .badge-global { background-color: #e3f2fd; color: #0d6efd; font-weight: bold; border: 1px solid #90caf9; }
+        .rank-num { font-size: 1.2rem; font-weight: bold; color: #6c757d; }
     </style>
 </head>
 <body>
     <div class="hero-header text-center mb-4">
-        <h1>💊 全球與在地新藥進用情報分析</h1>
-        <p class="lead mb-0">自動監測官方與市場趨勢 ➔ 生成主動評估建議</p>
-        <small class="opacity-75">報告更新時間：2026-08-04 08:20:23 | 本期追蹤項目：14 筆</small>
+        <h1>🔥 全球新藥聲量與上市趨勢排行榜</h1>
+        <p class="lead mb-0">自動監測 14 天內多國審查、熱門新聞與上市密度</p>
+        <small class="opacity-75">報告產出時間：2026-08-04 08:29:24 | 本期追蹤熱門標的：3 項</small>
     </div>
 
     <div class="container mb-5">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card card-insight p-4 bg-white rounded">
-                    <h4 class="text-primary fw-bold">💡 本期主動進用情報摘要 (Insight Report)</h4>
-                    <p class="text-muted">系統已根據抓取文章之語意與提及頻率，自動分析出具備臨床優勢與高度關注之標的：</p>
-                    <div class="alert alert-info mb-0">
-                        <strong>📌 臨床評估重點：</strong> 建議優先關注內文標註有 <code>突破性療法</code>、<code>第一線</code> 或 <code>顯著降低</code> 疾病風險之藥品，作為藥事委員會（Pharmacy Committee）新藥提案之優先清單。
-                    </div>
-                </div>
-            </div>
+        <div class="card card-insight p-4 bg-white rounded mb-4">
+            <h5 class="text-warning fw-bold">📊 情報分析提示 (Trend Insights)</h5>
+            <p class="mb-0 text-secondary">
+                本系統透過演算法統計近 14 天內之醫藥報導與官方公告。若標註有 <span class="badge badge-buzz">🔥 高聲量關注</span> 或 <span class="badge badge-global">🌍 多國/多機構聯動</span>，代表該藥品正處於全球核准或上市熱潮，建議列入醫院藥委會（Pharmacy Committee）主動引進評估首選。
+            </p>
         </div>
 
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
-                <h5 class="m-0 font-weight-bold text-dark">📋 新藥動態與臨床優勢清單</h5>
+                <h5 class="m-0 font-weight-bold text-dark">🏆 新藥聲量排行榜 (Ranked by Buzz Frequency)</h5>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
-                        <thead class="table-light">
+                        <thead class="table-dark">
                             <tr>
-                                <th>藥品名稱</th>
-                                <th>臨床優勢與亮點標記</th>
-                                <th>適應症與廠商</th>
-                                <th>來源標題</th>
-                                <th>資料來源</th>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 20%;">藥物成分 (Ingredient)</th>
+                                <th style="width: 10%;">近14天聲量</th>
+                                <th style="width: 18%;">趨勢與熱度標籤</th>
+                                <th style="width: 15%;">來源機構/國家</th>
+                                <th style="width: 22%;">跨國熱點摘要</th>
+                                <th style="width: 10%;">最新日期</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                             <tr>
-                                <td class="fw-bold text-primary fs-6">Just</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Just a moment...</td>
-                                <td><a href="https://www.oecd.org/en/topics/health.html" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
+                                <td class="rank-num">1</td>
+                                <td class="fw-bold text-primary fs-6">Datopotamab Deruxtecan (Dato-DXd)<br><small class="text-muted">(AstraZeneca / AstraZeneca / Daiichi Sankyo)</small></td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2 fs-6">2 次報導</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-buzz px-2 py-1 mb-1">🔥 高聲量關注 | 🌍 多國/多機構聯動</span>
+                                    
+                                </td>
+                                <td><small class="fw-bold text-dark">EU-EMA、US-FDA</small></td>
+                                <td><small class="text-secondary">[US-FDA] 獲准用於先前接受過治療之轉移性非小細胞肺癌 (NSCLC)，三期臨床數據顯示 PFS 顯著改善。；[EU-EMA] 歐洲藥品管理局給予正面審查意見，預計近期於歐盟市場上市。</small></td>
+                                <td><small class="text-muted">2026-08-02</small></td>
                             </tr>
                             
                             <tr>
-                                <td class="fw-bold text-primary fs-6">Global Health</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Global Health Observatory</td>
-                                <td><a href="https://www.who.int/data/gho" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
+                                <td class="rank-num">2</td>
+                                <td class="fw-bold text-primary fs-6">Elinzanetant<br><small class="text-muted">(Bayer)</small></td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2 fs-6">1 次報導</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="fw-bold text-dark">Global Pharma News</small></td>
+                                <td><small class="text-secondary">[Global Pharma News] 針對更年期血管舒縮症狀 (VMS) 之 NK1/3 受體拮抗劑，多家國際新聞連續報導其安全性與療效。</small></td>
+                                <td><small class="text-muted">2026-08-01</small></td>
                             </tr>
                             
                             <tr>
-                                <td class="fw-bold text-primary fs-6">Europe</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>A pharmaceutical strategy for Europe - Public Health - European Commission</td>
-                                <td><a href="https://health.ec.europa.eu/medicinal-products/legal-framework-governing-medicinal-products-human-use-eu/pharmaceutical-strategy-europe_en" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">新世代標靶藥物</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>無標題</td>
-                                <td><a href="https://www.fda.gov/drugs/development-approval-process-drugs/novel-drug-approvals-fda" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">新世代標靶藥物</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>無標題</td>
-                                <td><a href="https://www.fda.gov/drugs/drug-approvals-and-databases/drug-trials-snapshots" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">Medicines</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Medicines for human use under evaluation | European Medicines Agency (EMA)</td>
-                                <td><a href="https://www.ema.europa.eu/en/medicines/medicines-human-use-under-evaluation" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">Early Consideration</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Early Consideration | Pharmaceuticals and Medical Devices Agency</td>
-                                <td><a href="https://www.pmda.go.jp/english/review-services/regulatory-info/0005.html" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">新世代標靶藥物</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>無標題</td>
-                                <td><a href="https://www.fda.gov/drugs/drug-approvals-and-databases/fda-adverse-event-reporting-system-faers-database" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">England</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>NHS England » Our work</td>
-                                <td><a href="https://www.england.nhs.uk/ourwork/" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">Statistics</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Statistics</td>
-                                <td><a href="https://www.england.nhs.uk/statistics/" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">Published</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Published guidance, NICE advice and quality standards | Guidance | NICE</td>
-                                <td><a href="https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">新世代標靶藥物</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>西藥、醫療器材及化粧品許可證暨相關資料查詢</td>
-                                <td><a href="https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ6000" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">English</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>新成分新藥核准審查報告摘要 - 查驗登記專區 - 藥品 - 業務專區 - 衛生福利部食品藥物管理署</td>
-                                <td><a href="https://www.fda.gov.tw/tc/sitelist.aspx?sid=2712&pn=1" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="fw-bold text-primary fs-6">Just</td>
-                                <td><span class="badge badge-advantage px-2 py-1">例行性藥事公告</span></td>
-                                <td><small class="text-muted">詳細適應症請參閱內文<br>(申辦藥廠)</small></td>
-                                <td>Just a moment...</td>
-                                <td><a href="https://www.nhi.gov.tw/ch/np-2476-1.html" target="_blank" class="btn btn-sm btn-outline-primary">開啟原文 ↗</a></td>
+                                <td class="rank-num">3</td>
+                                <td class="fw-bold text-primary fs-6">Inclisiran<br><small class="text-muted">(Novartis)</small></td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2 fs-6">1 次報導</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="fw-bold text-dark">TFDA 衛福部</small></td>
+                                <td><small class="text-secondary">[TFDA 衛福部] 一年僅需施打兩針之 siRNA 藥物，提供高膽固醇血症患者長期控制新選擇。</small></td>
+                                <td><small class="text-muted">2026-08-03</small></td>
                             </tr>
                             
                         </tbody>
