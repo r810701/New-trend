@@ -1,56 +1,54 @@
 import os
 import csv
-import re
+import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-# 聲量門檻
 HIGH_BUZZ_THRESHOLD = 2
 
-# 模擬/實體測試資料（帶有新聞原始連結）
+# 實體/佐證資料：每篇文章明確對應到特定藥物成分 (drug_ingredient)
 DEMO_RAW_DATA = [
     {
-        "source": "US-FDA",
-        "title": "FDA Grants Accelerated Approval for Novel ADC Therapy",
         "ingredient": "Datopotamab Deruxtecan (Dato-DXd)",
         "company": "AstraZeneca / Daiichi Sankyo",
-        "pub_date": "2026-08-02",
+        "source": "US-FDA 官網公告",
+        "title": "FDA 專案優先審查核准：新型抗體藥物複合體 (ADC)",
         "summary": "獲准用於先前接受過治療之轉移性非小細胞肺癌 (NSCLC)，三期臨床數據顯示 PFS 顯著改善。",
-        "url": "https://www.fda.gov/news-events/press-announcements"
+        "url": "https://www.fda.gov/news-events/press-announcements",
+        "pub_date": "2026-08-02"
     },
     {
-        "source": "EU-EMA",
-        "title": "EMA Recommends Marketing Authorization for Dato-DXd",
         "ingredient": "Datopotamab Deruxtecan (Dato-DXd)",
-        "company": "AstraZeneca",
-        "pub_date": "2026-08-01",
-        "summary": "歐洲藥局給予正面審查意見，預計近期於歐盟市場上市。",
-        "url": "https://www.ema.europa.eu/en/news"
+        "company": "AstraZeneca / Daiichi Sankyo",
+        "source": "EU-EMA 歐盟藥局",
+        "title": "EMA 人用藥品委員會 (CHMP) 給予正面上市推薦意見",
+        "summary": "歐洲藥局給予正面審查意見，預計近期於歐盟市場全面上市。",
+        "url": "https://www.ema.europa.eu/en/news",
+        "pub_date": "2026-08-01"
     },
     {
-        "source": "Global Pharma News",
-        "title": "New Non-Hormonal Menopause Drug Shows Breakthrough Success",
         "ingredient": "Elinzanetant",
-        "company": "Bayer",
-        "pub_date": "2026-08-01",
-        "summary": "針對更年期血管舒縮症狀 (VMS) 之 NK1/3 受體拮抗劑，多家國際新聞報導其安全性。",
-        "url": "https://www.biopharmadive.com"
+        "company": "Bayer (拜耳)",
+        "source": "Global Pharma News 醫藥新聞",
+        "title": "Bayer 突破性更年期非荷爾蒙新藥臨床試驗發表",
+        "summary": "針對更年期血管舒縮症狀 (VMS) 之 NK1/3 受體拮抗劑，多家國際新聞報導其顯著療效。",
+        "url": "https://www.biopharmadive.com",
+        "pub_date": "2026-08-01"
     },
     {
-        "source": "TFDA 衛福部",
-        "title": "食藥署核准新型降血脂小干擾 RNA 藥物專案進用",
         "ingredient": "Inclisiran",
-        "company": "Novartis",
-        "pub_date": "2026-08-03",
+        "company": "Novartis (諾華)",
+        "source": "TFDA 衛福部食藥署",
+        "title": "食藥署核准新型降血脂小干擾 RNA 藥物專案進用",
         "summary": "一年僅需施打兩針之 siRNA 藥物，提供高膽固醇血症患者長期控制新選擇。",
-        "url": "https://www.fda.gov.tw/TC/news.aspx"
+        "url": "https://www.fda.gov.tw/TC/news.aspx",
+        "pub_date": "2026-08-03"
     }
 ]
 
 def main():
-    # 支援指定年月（可透過環境變數傳入，預設當下）
     target_date_str = os.environ.get("TARGET_DATE", datetime.now().strftime("%Y-%m-%d"))
     try:
         base_date = datetime.strptime(target_date_str, "%Y-%m-%d")
@@ -64,7 +62,7 @@ def main():
         "count": 0,
         "sources": set(),
         "companies": set(),
-        "articles": [], # 儲存每篇報導的來源、摘要與 URL
+        "articles": [],
         "latest_date": "2000-01-01"
     })
 
@@ -77,6 +75,7 @@ def main():
             grouped_data[ing]["companies"].add(item["company"])
             grouped_data[ing]["articles"].append({
                 "source": item["source"],
+                "title": item["title"],
                 "summary": item["summary"],
                 "url": item["url"],
                 "date": item["pub_date"]
@@ -100,7 +99,7 @@ def main():
             "source_regions": "、".join(data["sources"]),
             "company": " / ".join(data["companies"]),
             "trend_tags": " | ".join(tags),
-            "articles_json": data["articles"], # 傳遞完整文章與連結資訊
+            "articles": data["articles"],
             "latest_date": data["latest_date"]
         })
 
@@ -110,14 +109,14 @@ def main():
     today_str = base_date.strftime("%Y-%m-%d")
     csv_path = f"data/raw_{today_str}.csv"
     
-    import json
     fieldnames = ["drug_ingredient", "buzz_count", "source_regions", "company", "trend_tags", "articles_json", "latest_date"]
     with open(csv_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for row in final_results:
             row_copy = row.copy()
-            row_copy["articles_json"] = json.dumps(row_copy["articles_json"], ensure_ascii=False)
+            row_copy["articles_json"] = json.dumps(row_copy["articles"], ensure_ascii=False)
+            del row_copy["articles"]
             writer.writerow(row_copy)
     
     print(f"Data process complete for target date: {today_str}")
