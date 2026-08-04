@@ -1,7 +1,6 @@
-# Minimal requirements for the report generator
 requests
 beautifulsoup4
 pandas
+openpyxl
 jinja2
 matplotlib
-openpyxl
