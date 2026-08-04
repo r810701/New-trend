@@ -1,99 +1,53 @@
-#!/usr/bin/env python3
-"""
-scripts/render_report.py
-- 讀取 data/articles_detailed.csv
-- 產生：
-  - reports/report_YYYY-MM-DD.html（月報樣式）
-  - reports/report_YYYY-MM-DD.xlsx（Excel）
-  - 圖表：phase distribution、top sponsors
-"""
+import csv
+import glob
 import os
-from datetime import datetime
-from collections import Counter
-
-import pandas as pd
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-from jinja2 import Environment, FileSystemLoader
-
-DATA_CSV = "data/articles_detailed.csv"
-OUT_DIR = "reports"
-TEMPLATE_DIR = "templates"
-TEMPLATE_NAME = "report_detailed.html"
-
-os.makedirs(OUT_DIR, exist_ok=True)
-
-
-def safe_read_csv(path):
-    try:
-        return pd.read_csv(path, dtype=str).fillna("")
-    except Exception as e:
-        print("Error reading CSV:", e)
-        return pd.DataFrame(columns=["timestamp", "seed", "url", "domain", "title", "drug_name", "indication", "sponsor", "phase", "date", "summary"])
-
-
-def make_bar_chart(values, title, outpath, top_n=10):
-    if values.empty:
-        return
-    counts = values.value_counts().head(top_n)
-    plt.figure(figsize=(8, 4))
-    counts.plot(kind="bar", color="#2c7fb8")
-    plt.title(title)
-    plt.tight_layout()
-    plt.savefig(outpath)
-    plt.close()
-
-
-def render(df):
-    date = datetime.utcnow().strftime("%Y-%m-%d")
-    # plots
-    ph_fig = f"phase_distribution_{date}.png"
-    sponsor_fig = f"top_sponsors_{date}.png"
-    ph_path = os.path.join(OUT_DIR, ph_fig)
-    sp_path = os.path.join(OUT_DIR, sponsor_fig)
-
-    if "phase" in df.columns:
-        make_bar_chart(df["phase"].replace("", "Unknown"), "Phase / Approval Status Distribution", ph_path)
-    if "sponsor" in df.columns:
-        make_bar_chart(df["sponsor"].replace("", "Unknown"), "Top Sponsors (by mentions)", sp_path)
-
-    # Excel output
-    xlsx_out = os.path.join(OUT_DIR, f"report_{date}.xlsx")
-    try:
-        df.to_excel(xlsx_out, index=False)
-    except Exception as e:
-        print("Failed to write Excel:", e)
-
-    # Jinja2 render
-    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
-    tpl = env.get_template(TEMPLATE_NAME)
-    exec_summary = {
-        "generated_at": date,
-        "total_records": len(df),
-        "unique_drugs": len(df["drug_name"].replace("", pd.NA).dropna().unique()) if "drug_name" in df.columns else 0,
-        "unique_sponsors": len(df["sponsor"].replace("", pd.NA).dropna().unique()) if "sponsor" in df.columns else 0,
-    }
-
-    html_out = os.path.join(OUT_DIR, f"report_{date}.html")
-    with open(html_out, "w", encoding="utf-8") as f:
-        f.write(tpl.render(date=date, exec_summary=exec_summary, table=df.to_dict(orient="records"),
-                           ph_fig=os.path.basename(ph_path), sp_fig=os.path.basename(sp_path)))
-    print("Wrote", html_out)
-    print("Wrote", xlsx_out)
-
+from jinja2 import Template
 
 def main():
-    df = safe_read_csv(DATA_CSV)
-    if df.empty:
-        print("No data found; please run fetch.py first.")
+    # 搜尋最新的 raw CSV 資料檔
+    csv_files = sorted(glob.glob("data/raw_*.csv"))
+    if not csv_files:
+        print("No CSV files found in data/")
         return
-    # basic cleaning: trim strings
-    for c in ["title", "drug_name", "indication", "sponsor", "phase", "date", "summary"]:
-        if c in df.columns:
-            df[c] = df[c].astype(str).str.strip()
-    render(df)
+    
+    latest_csv = csv_files[-1]
+    date_str = os.path.basename(latest_csv).replace("raw_", "").replace(".csv", "")
+    print(f"Processing data from: {latest_csv}")
 
+    results = []
+    with open(latest_csv, "r", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            results.append(row)
+
+    # 1. 嘗試產出 Excel 檔案（若環境允許）
+    try:
+        import pandas as pd
+        df = pd.DataFrame(results)
+        os.makedirs("reports", exist_ok=True)
+        excel_path = f"reports/report_{date_str}.xlsx"
+        df.to_excel(excel_path, index=False)
+        print(f"Successfully generated Excel report: {excel_path}")
+    except Exception as e:
+        print(f"Notice: Excel generation skipped or failed ({e}), rendering HTML report.")
+
+    # 2. 產出 HTML 網頁報表
+    template_path = "templates/index.html"
+    if os.path.exists(template_path):
+        with open(template_path, "r", encoding="utf-8") as f:
+            tmpl_str = f.read()
+        
+        tmpl = Template(tmpl_str)
+        rendered_html = tmpl.render(
+            results=results,
+            generated_at=date_str,
+            total_items=len(results)
+        )
+        
+        html_path = f"reports/report_{date_str}.html"
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
+        print(f"Successfully generated HTML report: {html_path}")
 
 if __name__ == "__main__":
     main()
