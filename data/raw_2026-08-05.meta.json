@@ -1,7 +1,7 @@
 {
   "target_date": "2026-08-05",
   "since_days": 14,
-  "generated_at": "2026-08-05T19:33:12",
+  "generated_at": "2026-08-05T12:00:47",
   "offline": false,
   "sources": {
     "fda": {
@@ -33,6 +33,6 @@
     "raw": 143,
     "in_window": 90,
     "groups": 82,
-    "http_requests": 7
+    "http_requests": 57
   }
 }
