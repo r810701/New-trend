@@ -1,14 +1,39 @@
-https://www.oecd.org/en/topics/health.html
-https://www.who.int/data/gho
-https://health.ec.europa.eu/medicinal-products/legal-framework-governing-medicinal-products-human-use-eu/pharmaceutical-strategy-europe_en
-https://www.fda.gov/drugs/development-approval-process-drugs/novel-drug-approvals-fda
-https://www.fda.gov/drugs/drug-approvals-and-databases/drug-trials-snapshots
-https://www.ema.europa.eu/en/medicines/medicines-human-use-under-evaluation
-https://www.pmda.go.jp/english/review-services/regulatory-info/0005.html 
-https://www.fda.gov/drugs/drug-approvals-and-databases/fda-adverse-event-reporting-system-faers-database　
-https://www.england.nhs.uk/ourwork/
-https://www.england.nhs.uk/statistics/
-https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance 
-https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ6000 
-https://www.fda.gov.tw/tc/sitelist.aspx?sid=2712&pn=1 
-https://www.nhi.gov.tw/ch/np-2476-1.html
+# 目標站清單 —— 這個檔是「候選來源與實測狀態」的紀錄，程式不讀它。
+#
+# 各站的 URL 寫死在對應的 scripts/newtrend/sources/*.py 裡，因為每個站
+# 除了 URL 之外還需要各自的版型知識（分頁參數、表頭位置、欄位對應）。
+# 把 URL 抽出來放這裡只會製造「改了這裡以為就會生效」的錯覺。
+#
+# 狀態為 2026-08-05 逐一實測結果。
+# 格式：<狀態>  <parser>  <URL>
+
+# === 有 parser，實際在抓 ===
+200  fda_novel.py        https://www.fda.gov/drugs/development-approval-process-drugs/novel-drug-approvals-fda
+200  ema_evaluation.py   https://www.ema.europa.eu/en/medicines/medicines-human-use-under-evaluation
+200  nice_ta.py          https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance
+200  tfda_approvals.py   https://www.fda.gov.tw/tc/sitelist.aspx?sid=2712&pn=1
+
+# === 官方 API（非爬蟲，走 sources/*_api.py 做補充查詢）===
+200  openfda_api.py         https://api.fda.gov/drug/drugsfda.json
+200  clinicaltrials_api.py  https://clinicaltrials.gov/api/v2/studies
+
+# === 沒有 parser，各有原因 ===
+
+# 403：需規避機器人偵測才進得去。不做 —— 那是紅線。
+403  —  https://www.oecd.org/en/topics/health.html
+403  —  https://www.nhi.gov.tw/ch/np-2476-1.html
+
+# 404：原始清單這兩行結尾各有一個全形空格 U+3000，URL 本身是壞的；
+#      修掉空格後 FAERS 那頁仍已改版，lmspiq 連結已死。
+404  —  https://www.fda.gov/drugs/drug-approvals-and-databases/fda-adverse-event-reporting-system-faers-database
+404  —  https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ6000
+
+# 200 但不是藥品層級的清單，是政策頁與資料入口，抓下來沒有成分可歸戶。
+200  —  https://www.who.int/data/gho
+200  —  https://health.ec.europa.eu/medicinal-products/legal-framework-governing-medicinal-products-human-use-eu/pharmaceutical-strategy-europe_en
+200  —  https://www.england.nhs.uk/ourwork/
+200  —  https://www.england.nhs.uk/statistics/
+
+# 200 但是轉接頁／不同性質的清單，要再往下爬才有核准資料。之後可做。
+200  —  https://www.pmda.go.jp/english/review-services/regulatory-info/0005.html
+200  —  https://www.fda.gov/drugs/drug-approvals-and-databases/drug-trials-snapshots
