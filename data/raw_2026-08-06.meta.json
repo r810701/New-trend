@@ -1,0 +1,38 @@
+{
+  "target_date": "2026-08-06",
+  "since_days": 14,
+  "generated_at": "2026-08-06T02:24:11",
+  "offline": false,
+  "sources": {
+    "fda": {
+      "ok": true,
+      "count": 30
+    },
+    "ema": {
+      "ok": true,
+      "count": 84
+    },
+    "nice": {
+      "ok": true,
+      "count": 20
+    },
+    "tfda": {
+      "ok": true,
+      "count": 10
+    },
+    "openfda": {
+      "ok": true,
+      "enriched": 17
+    },
+    "clinicaltrials": {
+      "ok": true,
+      "enriched": 25
+    }
+  },
+  "counts": {
+    "raw": 144,
+    "in_window": 90,
+    "groups": 82,
+    "http_requests": 57
+  }
+}

@@ -1,0 +1,2324 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>全球新藥熱度與上市聲量排行榜 2026-08-06</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: "Microsoft JhengHei", sans-serif; }
+        .hero-header { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: white; padding: 2rem 0; }
+        .card-insight { border-left: 5px solid #ff9f43; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .badge-buzz { background-color: #ffeaa7; color: #d63031; font-weight: bold; border: 1px solid #fdcb6e; }
+        .badge-global { background-color: #e3f2fd; color: #0d6efd; font-weight: bold; border: 1px solid #90caf9; }
+        .badge-tw { background-color: #f1f3f5; color: #495057; font-weight: bold; border: 1px solid #ced4da; }
+        .article-box { background-color: #f8f9fa; border-left: 3px solid #0d6efd; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; }
+        .btn-verify { font-size: 0.78rem; padding: 2px 8px; font-weight: 500; }
+        .src-ok { color: #1b7a43; } .src-bad { color: #c92a2a; font-weight: bold; }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; }
+            .hero-header { background: #2c5364 !important; -webkit-print-color-adjust: exact; }
+            .card { border: 1px solid #ccc !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-header text-center mb-4 position-relative">
+        <h1>🔥 全球新藥聲量與上市趨勢排行榜</h1>
+        <p class="lead mb-0">FDA／EMA／NICE／TFDA 四方來源，依藥品成分歸戶</p>
+        <small class="opacity-75">報告基準日：2026-08-06 ｜ 聲量視窗：近 14 天 ｜ 本期標的：82 項</small>
+
+        <div class="position-absolute top-0 end-0 p-3 no-print">
+            <button onclick="window.print()" class="btn btn-light fw-bold shadow-sm">📄 列印 / 另存 PDF</button>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        
+
+        <div class="card card-insight p-4 bg-white rounded mb-4">
+            <h5 class="text-warning fw-bold">📌 趨勢標籤定義與資料口徑</h5>
+            <ul class="mb-2 text-secondary small">
+                <li><span class="badge badge-buzz">🔥 高聲量關注</span>：同一成分在本期被 <strong>2 個（含）以上</strong>項目提及。</li>
+                <li><span class="badge badge-global">🌍 多國/多機構聯動</span>：同一成分同時出現在 <strong>2 個以上藥政機構</strong>（US-FDA／EU-EMA／UK-NICE）。</li>
+                <li><span class="badge badge-global">📈 新進觀察標的</span>：本期僅單一來源提及。</li>
+                <li><span class="badge badge-tw">🇹🇼 TW 專屬・無 INN 對應</span>：TFDA 公告只有中文品名，英文成分名在 PDF 內，<strong>無法與國際來源比對</strong>，故單獨列示、不計入聯動。</li>
+            </ul>
+            <div class="alert alert-info py-2 px-3 mb-2 small">
+                <strong>EMA 是「審查中清單」快照</strong>，不是當期新事件：該來源逐筆沒有日期，
+                整份套用快照抽取日，因此<strong>不受 14 天視窗限制</strong>。
+                FDA／NICE／TFDA 則為當期事件，有套視窗。
+            </div>
+            <small class="text-muted">
+                來源狀態：
+                
+                    <span class="src-ok">fda ✓</span> ｜ 
+                
+                    <span class="src-ok">ema ✓</span> ｜ 
+                
+                    <span class="src-ok">nice ✓</span> ｜ 
+                
+                    <span class="src-ok">tfda ✓</span> ｜ 
+                
+                    <span class="src-ok">openfda ✓</span> ｜ 
+                
+                    <span class="src-ok">clinicaltrials ✓</span>
+                
+            </small>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h5 class="m-0 font-weight-bold text-dark">🏆 新藥聲量排行榜</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 4%;">#</th>
+                                <th style="width: 20%;">藥物成分 (Ingredient)</th>
+                                <th style="width: 9%;">聲量</th>
+                                <th style="width: 16%;">趨勢標籤</th>
+                                <th style="width: 10%;">屬性</th>
+                                <th style="width: 32%;">佐證與來源連結</th>
+                                <th style="width: 9%;">最新日期</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">1</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Bevacizumab<br>
+                                    <small class="text-muted">(CELLTRION)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">2</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-buzz px-2 py-1 mb-1 d-block text-start">🔥 高聲量關注</span>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">🌍 多國/多機構聯動</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 四期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[US-FDA] FDA 核准新分子實體：Lytenava</strong>
+                                                <a href="https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">To treat patients with neovascular (wet) age-related macular degeneration</small>
+                                        </div>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Bevacizumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with advanced or metastatic cancers</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-24</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">2</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Finerenone<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[UK-NICE] NICE 技術評估發布：Finerenone for treating chronic heart failure with preserved or mildly reduced ejection fraction</strong>
+                                                <a href="https://www.nice.org.uk/guidance/ta1182" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Finerenone for treating chronic heart failure with preserved or mildly reduced ejection fraction</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-08-05</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">3</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Aficamten<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[UK-NICE] NICE 技術評估發布：Aficamten for treating symptomatic obstructive hypertrophic cardiomyopathy</strong>
+                                                <a href="https://www.nice.org.uk/guidance/ta1181" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Aficamten for treating symptomatic obstructive hypertrophic cardiomyopathy</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-30</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">4</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    佐加洛注射劑<br>
+                                    <small class="text-muted">(友華生技醫藥股份有限公司)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-tw px-2 py-1 mb-1 d-block text-start">🇹🇼 TW 專屬・無 INN 對應</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[TW-TFDA] TFDA 核准新成分新藥：友華生技醫藥股份有限公司「佐加洛注射劑」(衛部菌疫輸字第001328號)</strong>
+                                                <a href="https://www.fda.gov.tw/tc/includes/GetFile.ashx?id=f639205060054068007&type=2&cid=51371" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">審查報告摘要 PDF（英文成分名需開啟 PDF 查閱）</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-24</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">5</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    oveporexton<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[US-FDA] FDA 核准新分子實體：Orzeyful</strong>
+                                                <a href="https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">To treat narcolepsy type 1</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-08-05</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">6</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    centanafadine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[US-FDA] FDA 核准新分子實體：Simtriyo</strong>
+                                                <a href="https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">To treat attention-deficit hyperactivity disorder</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-24</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">7</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Abatacept<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Abatacept</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of rheumatoid, psoriatic arthritis and polyarticular juvenile idiopathic arthritis in patients 6 years of age and older</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">8</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Aceclidine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Aceclidine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of presbyopia in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">9</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Anselamimab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Anselamimab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with kappa light chain amyloidosis</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">10</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Apitegromab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / PRIME</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Apitegromab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of 5q spinal muscular atrophy (SMA)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">11</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Apixaban<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Apixaban</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Prevention of venous thromboembolic events (VTE), stroke and systemic embolism; treatment of deep vein thrombosis (DVT) and pulmonary embolism (PE) in adults. Treatment of VTE in children from 28 days to < 18 years of age.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">12</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Arimoclomol<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Arimoclomol</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Niemann-Pick disease type C (NPC) in patients aged 6 months and older in combination with miglustat</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">13</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Asundexian<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Asundexian</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Prevention of ischaemic stroke in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">14</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Azacitidine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Azacitidine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of myelodysplastic syndromes (MDS), chronic myelomonocytic leukemia (CMML) and acute myeloid leukemia (AML)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">15</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Baxdrostat<br>
+                                    <small class="text-muted">(ASTRAZENECA AB)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Baxdrostat</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of hypertension in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">16</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Bepirovirsen<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Bepirovirsen</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of chronic hepatitis B virus (HBV) infection in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">17</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Catequentinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Catequentinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of synovial sarcoma or leiomyosarcoma</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">18</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Cefepime / Zidebactam<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Cefepime / Zidebactam</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of a number of infections in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">19</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Cemdisiran<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Cemdisiran</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of generalised myasthenia gravis in adult patients</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">20</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Cladribine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Cladribine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of acute myeloid leukaemia (AML) in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">21</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Cosibelimab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Cosibelimab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with metastatic or locally advanced cutaneous squamous cell carcinoma</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">22</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Denecimig<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Denecimig</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Prophylaxis of bleeding episodes in patients with haemophilia A</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">23</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Deuruxolitinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Deuruxolitinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of severe alopecia areata in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">24</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Doravirine / Islatravir<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Doravirine / Islatravir</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of HIV-1 infection in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">25</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Emapalumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Emapalumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of acute or recurrent secondary haemophagocytic lymphohistiocytosis (sHLH) in adult and paediatric patients (6 months and older)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">26</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Enlicitide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Enlicitide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Indicated in adults with primary hypercholesterolaemia or mixed dyslipidaemia</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">27</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ensartinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ensartinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">The treatment of adult patients with anaplastic lymphoma kinase (ALK)-positive advanced non-small cell lung cancer (NSCLC).</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">28</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ensitrelvir<br>
+                                    <small class="text-muted">(SHIONOGI)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ensitrelvir</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of coronavirus disease 2019 (COVID-19)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">29</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Etripamil<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Etripamil</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Indicated for the rapid conversion of paroxysmal supraventricular tachycardia (PSVT) episodes to sinus rhythm in adults.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">30</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Fondaparinux sodium<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Fondaparinux sodium</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Prevention of venous thromboembolic events (VTE), treatment of deep vein thrombosis (DVT), treatment of pulmonary embolism, treatment of unstable angina and myocardial infarction in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">31</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Gadoquatrane<br>
+                                    <small class="text-muted">(BAYER HEALTHCARE)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Gadoquatrane</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">For contrast enhancement in magnetic resonance imaging (MRI) used for adults and paediatric patients of all ages.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">32</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Garetosmab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Garetosmab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with fibrodysplasia ossificans progressiva (FOP)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">33</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Gefurulimab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Gefurulimab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with generalised myasthemia gravis (gMG)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">34</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Glepaglutide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Glepaglutide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adults with Short Bowel Syndrome</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">35</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Hexaminolevulinate<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Hexaminolevulinate</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with histologically confirmed cervical high-grade squamous intraepithelial lesions (HSIL)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">36</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ianalumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ianalumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Sjögren’s disease in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">37</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Icotrokinra<br>
+                                    <small class="text-muted">(JANSSEN BIOTECH)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Icotrokinra</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of plaque psoriasis in adults and adolescents 12 years or older</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">38</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Influenza mRNA vaccine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Influenza mRNA vaccine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Immunisation for the prevention of influenza disease in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">39</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Insulin aspart<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Insulin aspart</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of diabetes mellitus from 1 year of age</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">40</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Japanese Encephalitis Chimeric Vaccine Substipharm<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Japanese Encephalitis Chimeric Vaccine Substipharm</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Immunisation against Japanese encephalitis in adults, adolescents, children and infants aged 9 months and older</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">41</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Leriglitazone<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Leriglitazone</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adrenoleukodystrophy</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">42</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Lerodalcibep<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Lerodalcibep</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Is indicated in adults with primary hypercholesterolaemia (heterozygous familial (HeFH) and non-familial) or mixed dyslipidaemia as an adjunct to diet.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">43</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Linerixibat<br>
+                                    <small class="text-muted">(INTERCEPT)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / 臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Linerixibat</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of cholestatic pruritus in adult patients with primary biliary cholangitis</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">44</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Lunsotogene parvec<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / 加速審查</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Lunsotogene parvec</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of biallelic OTOF variant-associated hearing loss in adults and children</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">45</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Mezigdomide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Mezigdomide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of relapsed or refractory multiple myeloma in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">46</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Molgramostim<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Molgramostim</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of pulmonary alveolar proteinosis in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">47</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Navepegritide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Navepegritide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of achondroplasia in children</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">48</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Norucholic acid<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Norucholic acid</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of primary sclerosing cholangitis (PSC) in adults.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">49</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Obicetrapib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Obicetrapib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of primary hypercholesterolaemia or mixed dyslipidaemia</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">50</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Obicetrapib / Ezetimibe<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Obicetrapib / Ezetimibe</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of primary hypercholesterolaemia or mixed dyslipidaemia</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">51</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Olanzapine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Olanzapine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of schizophrenia in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">52</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Omalizumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Omalizumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of asthma, chronic rhinosinusitis with nasal polyps (CRSwNP) and chronic spontaneous urticaria (CSU)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">53</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Orforglipron<br>
+                                    <small class="text-muted">(ELI LILLY AND CO)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 四期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Orforglipron</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of obesity and type 2 diabetes mellitus in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">54</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Pegfilgrastim<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Pegfilgrastim</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Reduction of neutropenia in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">55</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Pertuzumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Pertuzumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of breast cancer in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">56</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Pimicotinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / PRIME</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Pimicotinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of tenosynovial giant cell tumour in adults and adolescents from 12 years of age</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">57</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ponatinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ponatinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of chronic myeloid leukaemia (CML) or Philadelphia chromosome positive acute lymphoblastic leukaemia (Ph+ ALL) in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">58</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Povorcitinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Povorcitinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of active moderate to severe hidradenitis suppurativa (acne inversa) in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">59</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Rabies vaccine for human use prepared in cell cultures<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Rabies vaccine for human use prepared in cell cultures</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Pre-exposure and post-exposure prophylaxis against rabies in all age groups</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">60</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ranibizumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ranibizumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adults with neovascular (wet) age-related macular degeneration (AMD)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">61</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Regadenoson<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Regadenoson</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Pharmacological stress agent for myocardial perfusion imaging (MPI) and measurement of fractional flow reserve (FFR) in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">62</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Relacorilant<br>
+                                    <small class="text-muted">(CORCEPT THERAP)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / 臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Relacorilant</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with platinum-resistant epithelial ovarian, fallopian tube, or primary peritoneal cancer</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">63</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Rezvilutamide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Rezvilutamide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of high-volume metastatic hormone-sensitive prostate cancer (mHSPC) in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">64</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Riociguat<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Riociguat</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Chronic thromboembolic pulmonary hypertension (CTEPH) in adults and treatment of Pulmonary arterial hypertension (PAH) in adults and children from 6 years of age</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">65</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Ruxolitinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Ruxolitinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of myelofibrosis (MF), polycythaemia vera (PV) and Graft versus host disease (GvHD)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">66</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Semaglutide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Semaglutide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of type 2 diabetes in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">67</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Senaparib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Senaparib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Maintenance treatment of advanced epithelial high-grade ovarian, fallopian tube or primary peritoneal cancer</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">68</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Sintilimab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Sintilimab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of non-squamous non-small cell lung cancer in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">69</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Sonrotoclax<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Sonrotoclax</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adult patients with relapsed or refractory mantle cell lymphoma (MCL)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">70</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Sufentanil / Ketamine<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Sufentanil / Ketamine</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of acute pain in children aged 1 to less than 18 years.</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">71</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Tafamidis<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Tafamidis</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of hereditary transthyretin amyloidosis in adult patients with cardiomyopathy (ATTR-CM).</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">72</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Taletrectinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Taletrectinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adults with ROS1 positive advanced non-small cell lung cancer</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">73</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Tanruprubart<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Tanruprubart</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Guillain-Barré syndrome in adults and children</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">74</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Temozolomide<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Temozolomide</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adults with glioblastoma multiforme and children with malignant glioma</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">75</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Tofacitinib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Tofacitinib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of rheumatoid arthritis, psoriatic arthritis, ankylosing spondylitis, and ulcerative colitis in adults, and juvenile idiopathic arthritis (JIA) in children from 2 years old</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">76</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Tozorakimab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Tozorakimab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment for chronic obstructive pulmonary disease (COPD) in adult patients</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">77</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Trilaciclib<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Trilaciclib</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Prevention of chemotherapy-induced myelosuppression when administered prior to platinum/etoposide- or topotecan-containing regimens for extensive-stage small cell lung cancer (ES-SCLC)</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">78</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Vedolizumab<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary"></small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Vedolizumab</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Ulcerative Colitis, Crohn’s Disease and pouchitis in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">79</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Veligrotug<br>
+                                    <small class="text-muted">(VIRIDIAN THERAPEUTICS INC)</small>
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">臨床 三期</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Veligrotug</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of moderate to severe thyroid eye disease in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">80</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Venglustat<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Venglustat</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of Type 3 Gaucher disease (GD3) in adults and children</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">81</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Zamtocabtagene autoleucel<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥 / PRIME</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Zamtocabtagene autoleucel</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of adults with large B-cell lymphoma</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fw-bold text-muted">82</td>
+                                <td class="fw-bold text-primary fs-6">
+                                    Zopapogene imadenovec<br>
+                                    
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill px-3 py-2">1</span></td>
+                                <td>
+                                    
+                                        <span class="badge badge-global px-2 py-1 mb-1 d-block text-start">📈 新進觀察標的</span>
+                                    
+                                </td>
+                                <td><small class="text-secondary">孤兒藥</small></td>
+                                <td>
+                                    
+                                        <div class="article-box">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <strong class="text-dark small">[EU-EMA] EMA 審查中：Zopapogene imadenovec</strong>
+                                                <a href="https://www.ema.europa.eu/en/documents/report/applications-new-human-medicines-under-evaluation-july-2026_en.xlsx" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary btn-verify ms-2">來源 ↗</a>
+                                            </div>
+                                            <small class="text-secondary d-block">Treatment of respiratory papillomatosis in adults</small>
+                                        </div>
+                                    
+                                </td>
+                                <td><small class="text-muted">2026-07-07</small></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p class="text-muted small mt-3">產生時間 2026-08-06T02:24:11</p>
+    </div>
+</body>
+</html>
