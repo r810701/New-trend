@@ -64,8 +64,29 @@ HTML_TEMPLATE = """
     <div class="container mb-5">
         {% if failed_sources %}
         <div class="alert alert-danger">
-            <strong>⚠ 本期資料不完整</strong>：以下來源抓取失敗 —— {{ failed_sources|join('、') }}。
-            排行榜缺少這些來源的項目，跨機構聲量會被低估。
+            <strong>⚠ 本期資料不完整</strong>：以下來源抓取失敗，排行榜缺少這些來源的項目，
+            跨機構聲量會被低估。
+            <ul class="mb-0 mt-2">
+                {% for f in failed_sources %}
+                <li>
+                    <strong>{{ f.name }}</strong>
+                    {% if f.reason == 'bot_block' %}
+                        <span class="badge bg-warning text-dark">🤖 疑似機器人阻擋</span>
+                    {% elif f.reason in ('site_error', 'network', 'rate_limited') %}
+                        <span class="badge bg-secondary">🌐 對方站台問題（非本專案程式錯誤）</span>
+                    {% elif f.reason == 'format_changed' %}
+                        <span class="badge bg-danger">🛠 網站版型改變，parser 需要更新</span>
+                    {% else %}
+                        <span class="badge bg-dark">❓ 原因不明</span>
+                    {% endif %}
+                    —— {{ f.reason_label }}{% if f.status_code %}（HTTP {{ f.status_code }}）{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="small mt-2 text-muted">
+                「機器人阻擋」與「站台問題」通常是暫時性的，之後重跑常會自行恢復；
+                「版型改變」代表對方網站結構變了，需要有人去更新對應的 parser。
+            </div>
         </div>
         {% endif %}
 
@@ -84,8 +105,8 @@ HTML_TEMPLATE = """
             </div>
             <small class="text-muted">
                 來源狀態：
-                {% for name, ok in source_status %}
-                    <span class="{{ 'src-ok' if ok else 'src-bad' }}">{{ name }} {{ '✓' if ok else '✗' }}</span>{% if not loop.last %} ｜ {% endif %}
+                {% for s in source_status %}
+                    <span class="{{ 'src-ok' if s.ok else 'src-bad' }}" {% if not s.ok %}title="{{ s.reason_label }}{% if s.status_code %}（HTTP {{ s.status_code }}）{% endif %}"{% endif %}>{{ s.name }} {{ '✓' if s.ok else '✗' }}</span>{% if not loop.last %} ｜ {% endif %}
                 {% endfor %}
             </small>
         </div>
@@ -188,7 +209,8 @@ def main(argv=None) -> int:
 
     print(f"✓ reports/report_{target_date}.html / .xlsx（{len(results)} 個標的）")
     if meta.get("_failed"):
-        print(f"  ⚠ 本期有來源失敗：{', '.join(meta['_failed'])}（報表已標示）")
+        summary = "、".join(f"{f['name']}（{f['reason_label']}）" for f in meta["_failed"])
+        print(f"  ⚠ 本期有來源失敗：{summary}（報表已標示）")
     return 0
 
 
@@ -226,9 +248,18 @@ def _read_meta(csv_path: Path) -> dict:
     if not meta_path.exists():
         return {}
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    sources = meta.get("sources") or {}
     # fatal=False 是補充查詢（openFDA / ClinicalTrials）失敗，不算資料不完整。
-    meta["_failed"] = [n for n, s in (meta.get("sources") or {}).items()
-                       if not s.get("ok") and s.get("fatal", True)]
+    meta["_failed"] = [
+        {
+            "name": n,
+            "reason": s.get("reason", "unknown"),
+            "reason_label": s.get("reason_label", "未知錯誤"),
+            "status_code": s.get("status_code"),
+        }
+        for n, s in sources.items()
+        if not s.get("ok") and s.get("fatal", True)
+    ]
     return meta
 
 
@@ -248,7 +279,15 @@ def _write_html(path: Path, results, target_date: str, meta: dict) -> None:
         target_date=target_date,
         since_days=meta.get("since_days", 14),
         failed_sources=meta.get("_failed") or [],
-        source_status=[(n, s.get("ok", False)) for n, s in sources.items()],
+        source_status=[
+            {
+                "name": n,
+                "ok": s.get("ok", False),
+                "reason_label": s.get("reason_label", "未知錯誤"),
+                "status_code": s.get("status_code"),
+            }
+            for n, s in sources.items()
+        ],
         generated_at=meta.get("generated_at",
                               datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
         tag_class=_tag_class,

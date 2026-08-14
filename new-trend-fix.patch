@@ -1,0 +1,295 @@
+diff --git a/.github/workflows/generate-report.yml b/.github/workflows/generate-report.yml
+index 1bd0c2f..84b14dc 100644
+--- a/.github/workflows/generate-report.yml
++++ b/.github/workflows/generate-report.yml
+@@ -22,7 +22,13 @@ jobs:
+           python -m pip install --upgrade pip
+           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+ 
++      # fetch.py 對「單一來源失敗」是刻意 fail loud（exit 1），目的是讓 log 醒目、
++      # 不是要中止整條 pipeline —— 半套資料仍有價值，且失敗原因已經寫進
++      # meta.json、報表也會標示。所以這裡用 continue-on-error，讓後面的
++      # render / commit 照跑；step 本身仍會在 UI 上顯示警示三角形，不會被無聲吞掉。
+       - name: Run fetch
++        id: fetch
++        continue-on-error: true
+         run: python scripts/fetch.py
+ 
+       - name: Render report
+@@ -37,3 +43,9 @@ jobs:
+           git add -A
+           git commit -m "chore: auto-update drug trend report" || exit 0
+           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
++
++      # continue-on-error 會讓整個 job 顯示綠色成功，容易被忽略掉「其實有來源失敗」
++      # 這件事，所以額外補一個顯眼的 Actions annotation（畫面上會是黃色警告列）。
++      - name: Flag partial data
++        if: steps.fetch.outcome == 'failure'
++        run: echo "::warning title=部分資料來源失敗::本次有來源抓取失敗，報表仍已產生並標記不完整，詳見 data/raw_*.meta.json 或報表內的警示區塊。"
+diff --git a/scripts/fetch.py b/scripts/fetch.py
+index 1866317..2894085 100644
+--- a/scripts/fetch.py
++++ b/scripts/fetch.py
+@@ -14,7 +14,7 @@ from datetime import date, datetime
+ 
+ from newtrend import DATA_DIR
+ from newtrend.aggregate import aggregate, filter_window
+-from newtrend.http import Fetcher
++from newtrend.http import Fetcher, FetchError
+ from newtrend.sources import DEFAULT_SOURCES, ENRICHERS, REGISTRY
+ 
+ DEFAULT_WINDOW_DAYS = 14
+@@ -61,8 +61,9 @@ def main(argv=None) -> int:
+             status[name] = {"ok": True, "count": len(got)}
+             print(f"  {name:6s} {len(got):4d} 筆")
+         except Exception as exc:                      # noqa: BLE001 —— 要記下所有失敗型態
+-            status[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+-            print(f"  {name:6s} 失敗：{exc}", file=sys.stderr)
++            status[name] = _status_from_exc(exc)
++            print(f"  {name:6s} 失敗（{status[name]['reason_label']}）：{exc}",
++                  file=sys.stderr)
+ 
+     if not args.no_enrich and articles:
+         for name, module in ENRICHERS.items():
+@@ -72,9 +73,9 @@ def main(argv=None) -> int:
+                 print(f"  {name:14s} 補充 {filled} 個成分")
+             except Exception as exc:                  # noqa: BLE001
+                 # 補充失敗不影響主資料是否可用，記下來但不算整體失敗。
+-                status[name] = {"ok": False, "fatal": False,
+-                                "error": f"{type(exc).__name__}: {exc}"}
+-                print(f"  {name:14s} 補充失敗（不影響主資料）：{exc}", file=sys.stderr)
++                status[name] = {**_status_from_exc(exc), "fatal": False}
++                print(f"  {name:14s} 補充失敗（{status[name]['reason_label']}，"
++                      f"不影響主資料）：{exc}", file=sys.stderr)
+ 
+     windowed = filter_window(articles, base_date, args.since_days)
+     results = aggregate(windowed)
+@@ -97,6 +98,25 @@ def main(argv=None) -> int:
+     return 0
+ 
+ 
++def _status_from_exc(exc: Exception) -> dict:
++    """把例外轉成可以直接塞進 meta.json、也能直接給人看的失敗紀錄。
++
++    重點是 reason/reason_label：讓報表能區分「NICE 擋我們」跟「我們程式壞了」，
++    這兩件事的處理方式完全不同（前者等等重試，後者要改 parser）。
++    """
++    if isinstance(exc, FetchError):
++        reason, status_code, label = exc.reason, exc.status_code, exc.reason_label
++    else:
++        reason, status_code, label = "unknown", None, "未知錯誤（非預期例外）"
++    return {
++        "ok": False,
++        "error": f"{type(exc).__name__}: {exc}",
++        "reason": reason,
++        "reason_label": label,
++        "status_code": status_code,
++    }
++
++
+ def _resolve_date(raw: str | None) -> date:
+     if not raw:
+         return date.today()
+diff --git a/scripts/newtrend/http.py b/scripts/newtrend/http.py
+index 9113df4..d5d6eda 100644
+--- a/scripts/newtrend/http.py
++++ b/scripts/newtrend/http.py
+@@ -34,8 +34,54 @@ MAX_RETRIES = 3
+ TIMEOUT = 30
+ 
+ 
++RATE_LIMITED = {429}
++BOT_BLOCK_STATUS = {403, 401, 451}
++NOT_FOUND_STATUS = {404, 410}
++
++REASON_LABELS = {
++    "bot_block": "疑似機器人阻擋（對方回 403/451，非我方程式錯誤）",
++    "rate_limited": "被限流（HTTP 429）",
++    "site_error": "對方伺服器錯誤，重試 3 次仍失敗（HTTP 5xx）",
++    "not_found": "找不到頁面（HTTP 404/410），連結可能已失效",
++    "client_error": "用戶端請求被拒（HTTP 4xx）",
++    "network": "連線逾時或連不上對方站台",
++    "format_changed": "版型可能變了，parser 抓不到預期內容",
++    "offline_cache_miss": "--offline 模式下沒有這個 URL 的快取",
++    "unknown": "未知錯誤",
++}
++
++
+ class FetchError(RuntimeError):
+-    """對外請求失敗。source 模組不該吞掉它 —— 讓它冒到 fetch.py 去記狀態。"""
++    """對外請求失敗。source 模組不該吞掉它 —— 讓它冒到 fetch.py 去記狀態。
++
++    `reason` 是給人看的分類代碼（見 REASON_LABELS），不是給程式邏輯分支用的 ——
++    分類目的是讓報表能誠實標示「這是網站擋我們，不是我們程式壞了」，
++    避免每次失敗都籠統寫「抓取失敗」，逼人去翻 log 才知道發生什麼事。
++    """
++
++    def __init__(self, message: str, *, reason: str = "format_changed",
++                status_code: int | None = None) -> None:
++        # 預設 format_changed：http.py 內部一定會明指 reason，
++        # 沒指定的都是 source 模組手動丟的「找不到 <table>」之類版型錯誤。
++        super().__init__(message)
++        self.reason = reason
++        self.status_code = status_code
++
++    @property
++    def reason_label(self) -> str:
++        return REASON_LABELS.get(self.reason, REASON_LABELS["unknown"])
++
++    @staticmethod
++    def classify_status(status_code: int) -> str:
++        if status_code in BOT_BLOCK_STATUS:
++            return "bot_block"
++        if status_code in RATE_LIMITED:
++            return "rate_limited"
++        if status_code in NOT_FOUND_STATUS:
++            return "not_found"
++        if status_code >= 500:
++            return "site_error"
++        return "client_error"
+ 
+ 
+ class Fetcher:
+@@ -86,32 +132,43 @@ class Fetcher:
+             if cached is not None:
+                 return cached
+         if self.offline:
+-            raise FetchError(f"--offline 但快取沒有這個 URL：{url}")
++            raise FetchError(f"--offline 但快取沒有這個 URL：{url}",
++                             reason="offline_cache_miss")
+ 
+         last_error: Exception | None = None
++        last_status: int | None = None
+         for attempt in range(1, MAX_RETRIES + 1):
+             self._throttle(url)
+             try:
+                 resp = self.session.get(url, timeout=TIMEOUT)
+                 self.request_count += 1
+                 if resp.status_code in RETRY_STATUS:
++                    last_status = resp.status_code
+                     last_error = FetchError(f"HTTP {resp.status_code}")
+                     time.sleep(2 ** attempt)
+                     continue
+-                # 4xx 直接放棄，不進重試迴圈 —— 重試一個 404 只是浪費對方的資源。
++                # 4xx（RETRY_STATUS 以外）直接放棄，不進重試迴圈 —— 403/404
++                # 不會因為多打幾次就變成 200，重試只是浪費對方的資源。
+                 # 注意不能靠 raise_for_status()：它丟的 HTTPError 是 RequestException
+                 # 的子類，會被下面的 except 接走而照樣重試。
+                 if resp.status_code >= 400:
+-                    raise FetchError(f"{url} 回 HTTP {resp.status_code}（不重試）")
++                    reason = FetchError.classify_status(resp.status_code)
++                    raise FetchError(f"{url} 回 HTTP {resp.status_code}（不重試）",
++                                     reason=reason, status_code=resp.status_code)
+                 if self.use_cache:
+                     self._write_cache(url, resp.content)
+                 return resp.content
+             except requests.RequestException as exc:
+                 last_error = exc
++                last_status = None
+                 if attempt < MAX_RETRIES:
+                     time.sleep(2 ** attempt)
+ 
+-        raise FetchError(f"{url} 取用失敗（重試 {MAX_RETRIES} 次）：{last_error}")
++        # 重試耗盡：last_status 有值 → 對方一直回 5xx/429；沒值 → 是連線層級的問題
++        # （逾時、DNS、TLS 之類），兩者對「該不該懷疑自己程式壞了」的意義不同。
++        reason = FetchError.classify_status(last_status) if last_status else "network"
++        raise FetchError(f"{url} 取用失敗（重試 {MAX_RETRIES} 次）：{last_error}",
++                         reason=reason, status_code=last_status)
+ 
+     def get_text(self, url: str) -> str:
+         return self.get_bytes(url).decode("utf-8", errors="replace")
+diff --git a/scripts/render_report.py b/scripts/render_report.py
+index d1868b5..5751370 100644
+--- a/scripts/render_report.py
++++ b/scripts/render_report.py
+@@ -64,8 +64,29 @@ HTML_TEMPLATE = """
+     <div class="container mb-5">
+         {% if failed_sources %}
+         <div class="alert alert-danger">
+-            <strong>⚠ 本期資料不完整</strong>：以下來源抓取失敗 —— {{ failed_sources|join('、') }}。
+-            排行榜缺少這些來源的項目，跨機構聲量會被低估。
++            <strong>⚠ 本期資料不完整</strong>：以下來源抓取失敗，排行榜缺少這些來源的項目，
++            跨機構聲量會被低估。
++            <ul class="mb-0 mt-2">
++                {% for f in failed_sources %}
++                <li>
++                    <strong>{{ f.name }}</strong>
++                    {% if f.reason == 'bot_block' %}
++                        <span class="badge bg-warning text-dark">🤖 疑似機器人阻擋</span>
++                    {% elif f.reason in ('site_error', 'network', 'rate_limited') %}
++                        <span class="badge bg-secondary">🌐 對方站台問題（非本專案程式錯誤）</span>
++                    {% elif f.reason == 'format_changed' %}
++                        <span class="badge bg-danger">🛠 網站版型改變，parser 需要更新</span>
++                    {% else %}
++                        <span class="badge bg-dark">❓ 原因不明</span>
++                    {% endif %}
++                    —— {{ f.reason_label }}{% if f.status_code %}（HTTP {{ f.status_code }}）{% endif %}
++                </li>
++                {% endfor %}
++            </ul>
++            <div class="small mt-2 text-muted">
++                「機器人阻擋」與「站台問題」通常是暫時性的，之後重跑常會自行恢復；
++                「版型改變」代表對方網站結構變了，需要有人去更新對應的 parser。
++            </div>
+         </div>
+         {% endif %}
+ 
+@@ -84,8 +105,8 @@ HTML_TEMPLATE = """
+             </div>
+             <small class="text-muted">
+                 來源狀態：
+-                {% for name, ok in source_status %}
+-                    <span class="{{ 'src-ok' if ok else 'src-bad' }}">{{ name }} {{ '✓' if ok else '✗' }}</span>{% if not loop.last %} ｜ {% endif %}
++                {% for s in source_status %}
++                    <span class="{{ 'src-ok' if s.ok else 'src-bad' }}" {% if not s.ok %}title="{{ s.reason_label }}{% if s.status_code %}（HTTP {{ s.status_code }}）{% endif %}"{% endif %}>{{ s.name }} {{ '✓' if s.ok else '✗' }}</span>{% if not loop.last %} ｜ {% endif %}
+                 {% endfor %}
+             </small>
+         </div>
+@@ -188,7 +209,8 @@ def main(argv=None) -> int:
+ 
+     print(f"✓ reports/report_{target_date}.html / .xlsx（{len(results)} 個標的）")
+     if meta.get("_failed"):
+-        print(f"  ⚠ 本期有來源失敗：{', '.join(meta['_failed'])}（報表已標示）")
++        summary = "、".join(f"{f['name']}（{f['reason_label']}）" for f in meta["_failed"])
++        print(f"  ⚠ 本期有來源失敗：{summary}（報表已標示）")
+     return 0
+ 
+ 
+@@ -226,9 +248,18 @@ def _read_meta(csv_path: Path) -> dict:
+     if not meta_path.exists():
+         return {}
+     meta = json.loads(meta_path.read_text(encoding="utf-8"))
++    sources = meta.get("sources") or {}
+     # fatal=False 是補充查詢（openFDA / ClinicalTrials）失敗，不算資料不完整。
+-    meta["_failed"] = [n for n, s in (meta.get("sources") or {}).items()
+-                       if not s.get("ok") and s.get("fatal", True)]
++    meta["_failed"] = [
++        {
++            "name": n,
++            "reason": s.get("reason", "unknown"),
++            "reason_label": s.get("reason_label", "未知錯誤"),
++            "status_code": s.get("status_code"),
++        }
++        for n, s in sources.items()
++        if not s.get("ok") and s.get("fatal", True)
++    ]
+     return meta
+ 
+ 
+@@ -248,7 +279,15 @@ def _write_html(path: Path, results, target_date: str, meta: dict) -> None:
+         target_date=target_date,
+         since_days=meta.get("since_days", 14),
+         failed_sources=meta.get("_failed") or [],
+-        source_status=[(n, s.get("ok", False)) for n, s in sources.items()],
++        source_status=[
++            {
++                "name": n,
++                "ok": s.get("ok", False),
++                "reason_label": s.get("reason_label", "未知錯誤"),
++                "status_code": s.get("status_code"),
++            }
++            for n, s in sources.items()
++        ],
+         generated_at=meta.get("generated_at",
+                               datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
+         tag_class=_tag_class,

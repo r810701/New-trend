@@ -34,8 +34,54 @@ MAX_RETRIES = 3
 TIMEOUT = 30
 
 
+RATE_LIMITED = {429}
+BOT_BLOCK_STATUS = {403, 401, 451}
+NOT_FOUND_STATUS = {404, 410}
+
+REASON_LABELS = {
+    "bot_block": "疑似機器人阻擋（對方回 403/451，非我方程式錯誤）",
+    "rate_limited": "被限流（HTTP 429）",
+    "site_error": "對方伺服器錯誤，重試 3 次仍失敗（HTTP 5xx）",
+    "not_found": "找不到頁面（HTTP 404/410），連結可能已失效",
+    "client_error": "用戶端請求被拒（HTTP 4xx）",
+    "network": "連線逾時或連不上對方站台",
+    "format_changed": "版型可能變了，parser 抓不到預期內容",
+    "offline_cache_miss": "--offline 模式下沒有這個 URL 的快取",
+    "unknown": "未知錯誤",
+}
+
+
 class FetchError(RuntimeError):
-    """對外請求失敗。source 模組不該吞掉它 —— 讓它冒到 fetch.py 去記狀態。"""
+    """對外請求失敗。source 模組不該吞掉它 —— 讓它冒到 fetch.py 去記狀態。
+
+    `reason` 是給人看的分類代碼（見 REASON_LABELS），不是給程式邏輯分支用的 ——
+    分類目的是讓報表能誠實標示「這是網站擋我們，不是我們程式壞了」，
+    避免每次失敗都籠統寫「抓取失敗」，逼人去翻 log 才知道發生什麼事。
+    """
+
+    def __init__(self, message: str, *, reason: str = "format_changed",
+                status_code: int | None = None) -> None:
+        # 預設 format_changed：http.py 內部一定會明指 reason，
+        # 沒指定的都是 source 模組手動丟的「找不到 <table>」之類版型錯誤。
+        super().__init__(message)
+        self.reason = reason
+        self.status_code = status_code
+
+    @property
+    def reason_label(self) -> str:
+        return REASON_LABELS.get(self.reason, REASON_LABELS["unknown"])
+
+    @staticmethod
+    def classify_status(status_code: int) -> str:
+        if status_code in BOT_BLOCK_STATUS:
+            return "bot_block"
+        if status_code in RATE_LIMITED:
+            return "rate_limited"
+        if status_code in NOT_FOUND_STATUS:
+            return "not_found"
+        if status_code >= 500:
+            return "site_error"
+        return "client_error"
 
 
 class Fetcher:
@@ -86,32 +132,43 @@ class Fetcher:
             if cached is not None:
                 return cached
         if self.offline:
-            raise FetchError(f"--offline 但快取沒有這個 URL：{url}")
+            raise FetchError(f"--offline 但快取沒有這個 URL：{url}",
+                             reason="offline_cache_miss")
 
         last_error: Exception | None = None
+        last_status: int | None = None
         for attempt in range(1, MAX_RETRIES + 1):
             self._throttle(url)
             try:
                 resp = self.session.get(url, timeout=TIMEOUT)
                 self.request_count += 1
                 if resp.status_code in RETRY_STATUS:
+                    last_status = resp.status_code
                     last_error = FetchError(f"HTTP {resp.status_code}")
                     time.sleep(2 ** attempt)
                     continue
-                # 4xx 直接放棄，不進重試迴圈 —— 重試一個 404 只是浪費對方的資源。
+                # 4xx（RETRY_STATUS 以外）直接放棄，不進重試迴圈 —— 403/404
+                # 不會因為多打幾次就變成 200，重試只是浪費對方的資源。
                 # 注意不能靠 raise_for_status()：它丟的 HTTPError 是 RequestException
                 # 的子類，會被下面的 except 接走而照樣重試。
                 if resp.status_code >= 400:
-                    raise FetchError(f"{url} 回 HTTP {resp.status_code}（不重試）")
+                    reason = FetchError.classify_status(resp.status_code)
+                    raise FetchError(f"{url} 回 HTTP {resp.status_code}（不重試）",
+                                     reason=reason, status_code=resp.status_code)
                 if self.use_cache:
                     self._write_cache(url, resp.content)
                 return resp.content
             except requests.RequestException as exc:
                 last_error = exc
+                last_status = None
                 if attempt < MAX_RETRIES:
                     time.sleep(2 ** attempt)
 
-        raise FetchError(f"{url} 取用失敗（重試 {MAX_RETRIES} 次）：{last_error}")
+        # 重試耗盡：last_status 有值 → 對方一直回 5xx/429；沒值 → 是連線層級的問題
+        # （逾時、DNS、TLS 之類），兩者對「該不該懷疑自己程式壞了」的意義不同。
+        reason = FetchError.classify_status(last_status) if last_status else "network"
+        raise FetchError(f"{url} 取用失敗（重試 {MAX_RETRIES} 次）：{last_error}",
+                         reason=reason, status_code=last_status)
 
     def get_text(self, url: str) -> str:
         return self.get_bytes(url).decode("utf-8", errors="replace")

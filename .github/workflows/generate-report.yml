@@ -22,7 +22,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      # fetch.py 對「單一來源失敗」是刻意 fail loud（exit 1），目的是讓 log 醒目、
+      # 不是要中止整條 pipeline —— 半套資料仍有價值，且失敗原因已經寫進
+      # meta.json、報表也會標示。所以這裡用 continue-on-error，讓後面的
+      # render / commit 照跑；step 本身仍會在 UI 上顯示警示三角形，不會被無聲吞掉。
       - name: Run fetch
+        id: fetch
+        continue-on-error: true
         run: python scripts/fetch.py
 
       - name: Render report
@@ -37,3 +43,9 @@ jobs:
           git add -A
           git commit -m "chore: auto-update drug trend report" || exit 0
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
+
+      # continue-on-error 會讓整個 job 顯示綠色成功，容易被忽略掉「其實有來源失敗」
+      # 這件事，所以額外補一個顯眼的 Actions annotation（畫面上會是黃色警告列）。
+      - name: Flag partial data
+        if: steps.fetch.outcome == 'failure'
+        run: echo "::warning title=部分資料來源失敗::本次有來源抓取失敗，報表仍已產生並標記不完整，詳見 data/raw_*.meta.json 或報表內的警示區塊。"

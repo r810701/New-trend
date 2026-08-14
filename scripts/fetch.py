@@ -14,7 +14,7 @@ from datetime import date, datetime
 
 from newtrend import DATA_DIR
 from newtrend.aggregate import aggregate, filter_window
-from newtrend.http import Fetcher
+from newtrend.http import Fetcher, FetchError
 from newtrend.sources import DEFAULT_SOURCES, ENRICHERS, REGISTRY
 
 DEFAULT_WINDOW_DAYS = 14
@@ -61,8 +61,9 @@ def main(argv=None) -> int:
             status[name] = {"ok": True, "count": len(got)}
             print(f"  {name:6s} {len(got):4d} 筆")
         except Exception as exc:                      # noqa: BLE001 —— 要記下所有失敗型態
-            status[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
-            print(f"  {name:6s} 失敗：{exc}", file=sys.stderr)
+            status[name] = _status_from_exc(exc)
+            print(f"  {name:6s} 失敗（{status[name]['reason_label']}）：{exc}",
+                  file=sys.stderr)
 
     if not args.no_enrich and articles:
         for name, module in ENRICHERS.items():
@@ -72,9 +73,9 @@ def main(argv=None) -> int:
                 print(f"  {name:14s} 補充 {filled} 個成分")
             except Exception as exc:                  # noqa: BLE001
                 # 補充失敗不影響主資料是否可用，記下來但不算整體失敗。
-                status[name] = {"ok": False, "fatal": False,
-                                "error": f"{type(exc).__name__}: {exc}"}
-                print(f"  {name:14s} 補充失敗（不影響主資料）：{exc}", file=sys.stderr)
+                status[name] = {**_status_from_exc(exc), "fatal": False}
+                print(f"  {name:14s} 補充失敗（{status[name]['reason_label']}，"
+                      f"不影響主資料）：{exc}", file=sys.stderr)
 
     windowed = filter_window(articles, base_date, args.since_days)
     results = aggregate(windowed)
@@ -95,6 +96,25 @@ def main(argv=None) -> int:
 
     print("✓ 全部來源成功")
     return 0
+
+
+def _status_from_exc(exc: Exception) -> dict:
+    """把例外轉成可以直接塞進 meta.json、也能直接給人看的失敗紀錄。
+
+    重點是 reason/reason_label：讓報表能區分「NICE 擋我們」跟「我們程式壞了」，
+    這兩件事的處理方式完全不同（前者等等重試，後者要改 parser）。
+    """
+    if isinstance(exc, FetchError):
+        reason, status_code, label = exc.reason, exc.status_code, exc.reason_label
+    else:
+        reason, status_code, label = "unknown", None, "未知錯誤（非預期例外）"
+    return {
+        "ok": False,
+        "error": f"{type(exc).__name__}: {exc}",
+        "reason": reason,
+        "reason_label": label,
+        "status_code": status_code,
+    }
 
 
 def _resolve_date(raw: str | None) -> date:
