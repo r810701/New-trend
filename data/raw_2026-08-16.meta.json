@@ -1,0 +1,41 @@
+{
+  "target_date": "2026-08-16",
+  "since_days": 14,
+  "generated_at": "2026-08-16T16:38:56",
+  "offline": false,
+  "sources": {
+    "fda": {
+      "ok": true,
+      "count": 30
+    },
+    "ema": {
+      "ok": true,
+      "count": 77
+    },
+    "nice": {
+      "ok": false,
+      "error": "FetchError: https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance 回 HTTP 403（不重試）",
+      "reason": "bot_block",
+      "reason_label": "疑似機器人阻擋（對方回 403/451，非我方程式錯誤）",
+      "status_code": 403
+    },
+    "tfda": {
+      "ok": true,
+      "count": 10
+    },
+    "openfda": {
+      "ok": true,
+      "enriched": 17
+    },
+    "clinicaltrials": {
+      "ok": true,
+      "enriched": 25
+    }
+  },
+  "counts": {
+    "raw": 117,
+    "in_window": 78,
+    "groups": 69,
+    "http_requests": 56
+  }
+}
