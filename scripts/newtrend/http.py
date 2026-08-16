@@ -1,8 +1,4 @@
-"""HTTP 取用層：誠實 UA、分站節流、重試、磁碟快取。
-
-所有對外請求都必須走這裡，不要在 source 模組裡自己開 requests。
-理由是節流表與快取只有集中起來才有意義 —— 散在各處的 sleep 擋不住併發。
-"""
+from __future__ import annotations
 
 import hashlib
 import time
@@ -17,12 +13,11 @@ from . import CACHE_DIR
 # 誠實標示自己是誰，不偽裝瀏覽器。探索階段用過 Chrome UA，那是一次性的。
 USER_AGENT = "New-trend/0.2 (personal research; +https://github.com/r810701/New-trend)"
 
-# 節流值來自各站 robots.txt 實測（2026-08-05），不是拍腦袋。
+# 節流值來自各站 robots.txt 實測，不是拍腦袋。
 # fda.gov 對 `User-agent: *` 明寫 Crawl-Delay: 30 —— 這是全場最嚴的一個。
 CRAWL_DELAY = {
     "www.fda.gov": 30.0,
     "api.fda.gov": 1.0,  # 官方 API，另有速率限制（240 req/min），非爬蟲路徑
-    "www.nice.org.uk": 1.0,
     "www.ema.europa.eu": 2.0,
     "www.fda.gov.tw": 3.0,  # robots.txt 明文擋 ClaudeBot/GPTBot，我們放寬節流以示尊重
     "clinicaltrials.gov": 1.0,

@@ -1,12 +1,9 @@
-"""資料模型與成分名正規化。
-
-`ingredient_key` 是整個專案的關鍵：跨源聲量能不能算對，全看同一個成分在
-FDA / EMA / NICE 三邊會不會收斂到同一個鍵。
-"""
+from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
 from datetime import date, datetime
+
 
 # FDA 給生物製劑加的 4 字母後綴（bevacizumab-vikg、trastuzumab-dkst…）。
 # 不剝掉的話，同一個成分在 FDA 與 EMA 永遠對不起來。

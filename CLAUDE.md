@@ -27,33 +27,22 @@ scripts/render_report.py  → reports/report_<date>.html
 （`pandas` 與 `matplotlib` 已移除：前者只被用來寫一行 `to_excel`，後者全檔沒有 `savefig`。）
 
 ```bash
-.venv/bin/python -m unittest discover -s tests -v    # 11 tests
+.venv/bin/python -m unittest discover -s tests -v    # 12 tests
 ```
 
 ---
 
-## 2. 資料來源：14 個候選只有 4 個可用
+## 2. 資料來源：FDA / EMA / TFDA + 官方 API + 生技文獻
 
-2026-08-05 逐一實測 `urls.txt` 全部 14 個 URL 的結果。**這是實測不是猜測，要推翻請重新實測。**
-
-### 有 parser 的 4 個
-
+### 主力 Parser
 | 來源 | 給什麼 | 有沒有 INN |
 |---|---|---|
 | FDA novel drug approvals（年度頁） | `<table>`：Drug Name / **Active Ingredient** / Approval Date / Use | ✅ |
 | EMA under evaluation | 月報 `.xlsx`：**INN** / 適應症 / Orphan / PRIME / 加速審查 | ✅ |
-| NICE TA published | `<table>`：標題（首字即 INN）/ TA 編號 / 發布日 | ✅（靠標題首字，非保證） |
 | TFDA 新成分新藥核准審查報告摘要 | `<table>`：廠商 / 中文品名 / 許可證號 / 發布日 / PDF | ❌ 見 §4 |
 
-### 不做的 10 個，各有理由
-
-- **403**：OECD health、健保署 `np-2476-1` —— 要規避機器人偵測才過得去，那是紅線，不做。
-- **404**：FAERS（`urls.txt` 該行結尾原本有個**全形空格 U+3000**，URL 是壞的）、
-  lmspiq `DRPIQ6000`（連結已死）。
-- **200 但沒有藥品層級清單**：WHO GHO、EC 藥政策頁、NHS England ×2 —— 是政策頁與資料入口。
-- **要再往下爬兩層**：PMDA `0005.html` 是轉接頁，暫不做。
-
-`urls.txt` 已改成帶註解的格式，逐行標明實測狀態。**不要看到 14 個 URL 就以為 14 個都在抓。**
+- **NICE 已移除**：因 UK-NICE 頻繁對爬蟲回傳 403 阻擋，已從預設 REGISTRY 移除。
+- **生技新聞與期刊文獻 (第四區域)**：整合 Fierce Biotech/Pharma, BioPharma Dive, 環球生技, GeneOnline, PubMed 等權威報導與實證文獻。
 
 ---
 

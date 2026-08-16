@@ -10,16 +10,16 @@
 # === 有 parser，實際在抓 ===
 200  fda_novel.py        https://www.fda.gov/drugs/development-approval-process-drugs/novel-drug-approvals-fda
 200  ema_evaluation.py   https://www.ema.europa.eu/en/medicines/medicines-human-use-under-evaluation
-200  nice_ta.py          https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance
 200  tfda_approvals.py   https://www.fda.gov.tw/tc/sitelist.aspx?sid=2712&pn=1
 
 # === 官方 API（非爬蟲，走 sources/*_api.py 做補充查詢）===
 200  openfda_api.py         https://api.fda.gov/drug/drugsfda.json
 200  clinicaltrials_api.py  https://clinicaltrials.gov/api/v2/studies
 
-# === 沒有 parser，各有原因 ===
+# === 沒有 parser 或站方阻擋 ===
 
-# 403：需規避機器人偵測才進得去。不做 —— 那是紅線。
+# 403：需規避機器人偵測才進得去（含 NICE 近期封鎖）。不做 —— 那是紅線。
+403  nice_ta.py          https://www.nice.org.uk/guidance/published?ndt=Guidance&ngt=Technology+appraisal+guidance
 403  —  https://www.oecd.org/en/topics/health.html
 403  —  https://www.nhi.gov.tw/ch/np-2476-1.html
 

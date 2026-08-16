@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+from __future__ import annotations
+
 """抓取各國藥政新藥動態 → data/raw_<date>.csv
 
 這個檔只負責編排：呼叫哪些 source、套時間窗、寫檔、回報狀態。
@@ -11,16 +12,22 @@ import json
 import os
 import sys
 from datetime import date, datetime
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from newtrend import DATA_DIR
 from newtrend.aggregate import aggregate, filter_window
-from newtrend.http import Fetcher, FetchError
+from newtrend.http import FetchError, Fetcher
 from newtrend.sources import DEFAULT_SOURCES, ENRICHERS, REGISTRY
 
 DEFAULT_WINDOW_DAYS = 14
 
-FIELDNAMES = ["drug_ingredient", "has_inn", "buzz_count", "source_regions",
-              "company", "trend_tags", "flags", "articles_json", "latest_date"]
+FIELDNAMES = [
+    "drug_ingredient", "has_inn", "brand", "company", "indication", "flags",
+    "source_regions", "latest_date", "gap_code", "gap_label",
+    "foreign_stages_json", "taiwan_stages_json", "gap_json", "news_json", "articles_json",
+]
 
 
 def parse_args(argv=None):
@@ -29,9 +36,9 @@ def parse_args(argv=None):
     p.add_argument("--sources", default=",".join(DEFAULT_SOURCES),
                    help=f"逗號分隔，可選：{'、'.join(REGISTRY)}（預設全部）")
     p.add_argument("--target-date", default=os.environ.get("TARGET_DATE"),
-                   help="報告基準日 YYYY-MM-DD（預設今天；沿用舊的 TARGET_DATE 環境變數）")
+                   help="報告基準日 YYYY-MM-DD（預設今天；沿用 TARGET_DATE 環境變數）")
     p.add_argument("--since-days", type=int, default=DEFAULT_WINDOW_DAYS,
-                   help=f"往前幾天算聲量（預設 {DEFAULT_WINDOW_DAYS}）")
+                   help=f"往前幾天算時間窗（預設 {DEFAULT_WINDOW_DAYS}）")
     p.add_argument("--offline", action="store_true", help="只讀快取，完全不連外")
     p.add_argument("--no-cache", action="store_true", help="忽略快取，強制重抓")
     p.add_argument("--no-enrich", action="store_true",
@@ -60,7 +67,7 @@ def main(argv=None) -> int:
             articles.extend(got)
             status[name] = {"ok": True, "count": len(got)}
             print(f"  {name:6s} {len(got):4d} 筆")
-        except Exception as exc:                      # noqa: BLE001 —— 要記下所有失敗型態
+        except Exception as exc:  # noqa: BLE001
             status[name] = _status_from_exc(exc)
             print(f"  {name:6s} 失敗（{status[name]['reason_label']}）：{exc}",
                   file=sys.stderr)
@@ -71,8 +78,7 @@ def main(argv=None) -> int:
                 filled = module.enrich(fetcher, articles)
                 status[name] = {"ok": True, "enriched": filled}
                 print(f"  {name:14s} 補充 {filled} 個成分")
-            except Exception as exc:                  # noqa: BLE001
-                # 補充失敗不影響主資料是否可用，記下來但不算整體失敗。
+            except Exception as exc:  # noqa: BLE001
                 status[name] = {**_status_from_exc(exc), "fatal": False}
                 print(f"  {name:14s} 補充失敗（{status[name]['reason_label']}，"
                       f"不影響主資料）：{exc}", file=sys.stderr)
@@ -89,7 +95,6 @@ def main(argv=None) -> int:
 
     failed = [n for n in names if not status.get(n, {}).get("ok")]
     if failed:
-        # fail loud：半套資料看起來跟完整資料一模一樣，不出聲就會被當成完整的用。
         print(f"\n✗ 以下來源失敗：{', '.join(failed)}", file=sys.stderr)
         print("  報表仍會產生，但已在 meta.json 標記不完整。", file=sys.stderr)
         return 1
@@ -99,11 +104,6 @@ def main(argv=None) -> int:
 
 
 def _status_from_exc(exc: Exception) -> dict:
-    """把例外轉成可以直接塞進 meta.json、也能直接給人看的失敗紀錄。
-
-    重點是 reason/reason_label：讓報表能區分「NICE 擋我們」跟「我們程式壞了」，
-    這兩件事的處理方式完全不同（前者等等重試，後者要改 parser）。
-    """
     if isinstance(exc, FetchError):
         reason, status_code, label = exc.reason, exc.status_code, exc.reason_label
     else:
@@ -135,15 +135,26 @@ def _write_csv(base_date: date, results: list[dict]) -> None:
         writer.writeheader()
         for row in results:
             writer.writerow({
-                **{k: row[k] for k in FIELDNAMES if k in row},
-                "trend_tags": " | ".join(row["trend_tags"]),
-                "articles_json": json.dumps(row["articles"], ensure_ascii=False),
+                "drug_ingredient": row.get("drug_ingredient", ""),
+                "has_inn": row.get("has_inn", True),
+                "brand": row.get("brand", ""),
+                "company": row.get("company", ""),
+                "indication": row.get("indication", ""),
+                "flags": row.get("flags", ""),
+                "source_regions": row.get("source_regions", ""),
+                "latest_date": row.get("latest_date", ""),
+                "gap_code": row.get("gap", {}).get("code", ""),
+                "gap_label": row.get("gap", {}).get("label", ""),
+                "foreign_stages_json": json.dumps(row.get("foreign_stages", {}), ensure_ascii=False),
+                "taiwan_stages_json": json.dumps(row.get("taiwan_stages", {}), ensure_ascii=False),
+                "gap_json": json.dumps(row.get("gap", {}), ensure_ascii=False),
+                "news_json": json.dumps(row.get("news_articles", []), ensure_ascii=False),
+                "articles_json": json.dumps(row.get("articles", []), ensure_ascii=False),
             })
 
 
 def _write_meta(base_date, args, status, raw_count, windowed_count,
                 group_count, requests_made) -> None:
-    """讓報表能標示「本期某來源失敗」—— 沒有這個檔，半套報表看起來就是完整的。"""
     path = DATA_DIR / f"raw_{base_date.isoformat()}.meta.json"
     path.write_text(json.dumps({
         "target_date": base_date.isoformat(),
